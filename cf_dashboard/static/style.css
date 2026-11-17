@@ -1,0 +1,346 @@
+:root {
+  --bg: #0d1117;
+  --bg-panel: #12181f;
+  --bg-panel-alt: #0e131a;
+  --border: #212a35;
+  --text: #e6edf3;
+  --text-dim: #8b96a5;
+  --accent: #4fd1c5;
+
+  --cf-gray: #8f8f8f;
+  --cf-green: #1fa34a;
+  --cf-cyan: #17a2a2;
+  --cf-blue: #2b5fd9;
+  --cf-purple: #a83fd9;
+  --cf-orange: #e08a1e;
+  --cf-red: #e03e3e;
+
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 15px;
+}
+
+h1, h2, h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0; }
+
+/* ---------- status bar ---------- */
+
+.statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.9rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-panel-alt);
+  flex-wrap: wrap;
+}
+
+.statusbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.statusbar__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.statusbar__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.statusbar__stats {
+  display: flex;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.stat strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ---------- layout ---------- */
+
+.layout {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2rem 1.75rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 820px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ---------- panels ---------- */
+
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-width: 0;
+}
+
+.panel--hero {
+  padding: 1.75rem 1.75rem 1.25rem;
+}
+
+.panel__head h2 {
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.panel__head p {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  margin-top: 0.35rem;
+  max-width: 46ch;
+}
+
+.panel__body {
+  position: relative;
+  min-height: 220px;
+}
+
+.panel--hero .panel__body {
+  min-height: 340px;
+}
+
+canvas { max-width: 100%; }
+
+/* ---------- heatmap ---------- */
+
+.heatmap {
+  display: grid;
+  gap: 3px;
+  font-size: 0.68rem;
+}
+
+.heatmap__row {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 3px;
+}
+
+.heatmap__cell {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(230, 237, 243, 0.85);
+  min-width: 0;
+}
+
+.heatmap__label {
+  color: var(--text-dim);
+  padding: 2px 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+/* ---------- footer ---------- */
+
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ===============================
+   Practice Problem Generator
+   =============================== */
+
+.practice-panel {
+    margin-top: 24px;
+}
+
+.practice-filters {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    align-items: end;
+    margin-top: 20px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.filter-group label {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.75;
+}
+
+.filter-group input,
+.filter-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid rgba(128, 128, 128, 0.35);
+    border-radius: 8px;
+    background: transparent;
+    font: inherit;
+}
+
+.filter-group select[multiple] {
+    min-height: 110px;
+}
+
+.filter-group select[multiple] option {
+    padding: 5px;
+}
+
+#generate-practice {
+    padding: 11px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+#generate-practice:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+#practice-results {
+    margin-top: 24px;
+}
+
+.practice-count {
+    margin-bottom: 12px;
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.problem-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.problem-row {
+    display: grid;
+    grid-template-columns: 40px 1fr 70px;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    border-radius: 10px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.problem-row:hover {
+    transform: translateX(3px);
+    border-color: rgba(128, 128, 128, 0.5);
+}
+
+.problem-number {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    opacity: 0.5;
+}
+
+.problem-title {
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.problem-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 3px 7px;
+    border-radius: 5px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    background: rgba(128, 128, 128, 0.12);
+}
+
+.problem-rating {
+    text-align: right;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 600;
+}
+
+.practice-empty,
+.practice-error {
+    padding: 20px;
+    text-align: center;
+    opacity: 0.65;
+    border: 1px dashed rgba(128, 128, 128, 0.3);
+    border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .practice-filters {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .practice-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .problem-row {
+        grid-template-columns: 30px 1fr;
+    }
+
+    .problem-rating {
+        grid-column: 2;
+        text-align: left;
+    }
+}
